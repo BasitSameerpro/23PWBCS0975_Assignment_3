@@ -1,23 +1,32 @@
 require("dotenv").config(); // Load environment variables
+const connectDB = require("./model/db.js"); // Changed from destructuring
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err.message));
-
-// Start the server
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-// Add cors middleware
+// Middleware
 app.use(cors());
+app.use(express.json()); // Removed duplicate
 
-app.use(express.json());
-app.use(express.json());
+// Connect to MongoDB and start server
+const startServer = async () => {
+  try {
+    await connectDB();
+    console.log("Connected to MongoDB");
+    
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Server startup error:", err.message);
+    process.exit(1);
+  }
+};
+
+startServer();
 
 // Routes
 const productRoutes = require("./api/productRoutes");
