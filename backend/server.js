@@ -26,6 +26,4 @@ const cartRoutes = require("./api/cartRoutes");
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app;
