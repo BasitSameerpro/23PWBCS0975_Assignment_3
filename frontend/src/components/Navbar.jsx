@@ -1,10 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <nav style={{ padding: "10px", background: "#f0f0f0" }}>
-      <Link to="/">Home</Link> | <Link to="/cart">Cart</Link>
+    <nav className="navbar">
+      <div className="nav-container">
+        <div className="nav-left">
+          <Link to="/" className="nav-link">Home</Link>
+        </div>
+        <div className="nav-right">
+          <Link to="/cart" className="nav-link">Cart</Link>
+        </div>
+      </div>
     </nav>
   );
 };
